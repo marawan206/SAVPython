@@ -1,12 +1,11 @@
-"""Heap sort implementation yielding intermediate states and metrics."""
-
 from typing import Iterable, List, Tuple, Dict, Generator
 
 Metrics = Dict[str, int]
 
 
 def heap_sort(data: Iterable[int]) -> Generator[Tuple[List[int], Metrics], None, None]:
-    """Sort *data* using heap sort.
+    """
+    Sort *data* using heap sort.
 
     Yields the array state and metrics dictionary after each swap.
     """

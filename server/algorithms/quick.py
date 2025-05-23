@@ -1,12 +1,11 @@
-"""Quick sort implementation yielding intermediate states and metrics."""
-
 from typing import Iterable, List, Tuple, Dict, Generator
 
 Metrics = Dict[str, int]
 
 
 def quick_sort(data: Iterable[int]) -> Generator[Tuple[List[int], Metrics], None, None]:
-    """Sort *data* using quick sort.
+    """
+    Sort *data* using quick sort.
 
     Yields the list state and metrics dictionary after each swap so the
     front–end visualiser can display the progress step by step.
