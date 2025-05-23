@@ -1,13 +1,9 @@
 export default function Metrics({ metrics }) {
-  if (!metrics) return null
+  if (!metrics) return null;
   return (
-    <div className="mt-6 text-center text-lg font-medium text-gray-700 space-y-1">
-      <p>
-        🔄 <span className="font-semibold">Comparisons:</span> {metrics.comparisons}
-      </p>
-      <p>
-        🔁 <span className="font-semibold">Swaps:</span> {metrics.swaps}
-      </p>
+    <div className="mt-6 text-center text-lg font-medium text-gray-800 space-y-2">
+      <p>🔍 Comparisons: <span className="font-semibold">{metrics.comparisons}</span></p>
+      <p>🔄 Swaps:       <span className="font-semibold">{metrics.swaps}</span></p>
     </div>
-  )
+  );
 }
