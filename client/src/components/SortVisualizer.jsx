@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import Metrics from './Metrics.jsx'
+import Controls from './Controls.jsx'
 
 export default function SortVisualizer({ algorithm }) {
   const initial = [5, 1, 4, 2, 8]
@@ -23,24 +25,29 @@ export default function SortVisualizer({ algorithm }) {
     fetchData()
   }, [algorithm])
 
-  useEffect(() => {
-    if (steps.length > 0 && current < steps.length - 1) {
-      const id = setTimeout(() => setCurrent((c) => c + 1), 500)
-      return () => clearTimeout(id)
-    }
-  }, [steps, current])
+  // Manual step control, no automatic progression
 
   const arr = steps[current]?.state || initial
+  const metrics = steps[current]?.metrics
 
   return (
-    <div className="flex items-end justify-center space-x-1 h-40">
-      {arr.map((v, i) => (
-        <div
-          key={i}
-          style={{ height: `${v * 10}px` }}
-          className="w-4 bg-blue-500"
-        ></div>
-      ))}
-    </div>
+    <>
+      <div className="flex items-end justify-center space-x-1 h-40">
+        {arr.map((v, i) => (
+          <div
+            key={i}
+            style={{ height: `${v * 10}px` }}
+            className="w-4 bg-blue-500"
+          ></div>
+        ))}
+      </div>
+      <Metrics metrics={metrics} />
+      <Controls
+        current={current}
+        total={steps.length}
+        onPrev={() => setCurrent((c) => Math.max(0, c - 1))}
+        onNext={() => setCurrent((c) => Math.min(steps.length - 1, c + 1))}
+      />
+    </>
   )
 }
