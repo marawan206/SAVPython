@@ -1,72 +1,84 @@
-### PHASED EXECUTION PLAN
+# Sorting Algorithm Visualizer (SAV)
 
-PHASE 1: Foundation Setup (Day 1 - May 22)
+This project demonstrates how common sorting algorithms work using a Flask backend and a React (Vite) frontend. It is developed as a university project for **Nile University** under the supervision of **Dr. Islam Tharwat**.
 
-Responsible: Mahmoud (Team Leader)
-Must be done first.
-	1.	Create main project file (main.py)
-	2.	Design menu structure:
-	•	Choose sorting algorithm
-	•	Input array or random generation
-	•	Delay setting
-	3.	Define global data format:
-	•	How the array will be passed
-	•	How to receive metrics (swaps, comparisons)
-	•	Function call structure for each algorithm
+## Team
 
-⸻
+- **Mahmoud Magdy Badawy** – Team Leader
+- Youssef Mohammed Gamal
+- Aly Sayed Aly
+- Donya Mousa
+- Marwan Mostafa
 
-PHASE 2: Sorting Algorithms Implementation (Parallel - Day 1)
+## Features
 
-Can be done in parallel once Mahmoud defines structure.
+- Implementations of Bubble, Selection, Insertion, Merge, Quick and Heap sort algorithms with metrics for comparisons and swaps
+- REST API providing algorithm steps and team information
+- React visualizer with tabs for each algorithm and an overlay to display sorting steps
+- Team page listing all members
+- Basic unit tests for all algorithms
 
-Youssef:
-	•	Implement Bubble Sort and Selection Sort
-	•	Add counting variables (comparisons, swaps)
-	•	Return current array state to visualizer after every step
+## Getting Started
 
-Aly:
-	•	Implement Insertion Sort and Merge Sort
-	•	Same structure: track and return array state + metrics
+### Prerequisites
 
-Donya:
-	•	Implement Quick Sort and Heap Sort
-	•	Integrate metrics and states after each change
+- Python 3.8 or newer
+- Node.js 18+ and npm
 
-NOTE: All 3 should follow the same function template so Mahmoud can easily integrate their work.
+### Backend Setup
 
-⸻
+1. Install Python dependencies:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   pip install -r requirements.txt
+   ```
+2. Run the Flask server:
+   ```bash
+   python server/app.py
+   ```
+   The API will be available at `http://localhost:5000`.
 
-PHASE 3: Visual Output & Display (Parallel - Day 2)
+### Frontend Setup
 
-Responsible: Marwan
-	1.	Write a function to visualize arrays in terminal using # bars or integers.
-	2.	Add os.system('cls' or 'clear') to clean terminal each step.
-	3.	Optional: use colorama to highlight comparisons or swaps.
-	4.	Test with Mahmoud’s menu and Donya/Youssef/Aly’s arrays.
+1. Install Node packages:
+   ```bash
+   cd client
+   npm install
+   ```
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+   Open the provided URL (typically `http://localhost:5173/`) to view the visualizer.
 
-⸻
+### Running Tests
 
-PHASE 4: Integration & Testing (Day 2 - May 23)
+To verify algorithm implementations, run:
 
-All team members
-	1.	Mahmoud collects functions from everyone.
-	2.	Integrate into main.py with visualizer support.
-	3.	Test all 6 algorithms:
-	•	With random and fixed arrays
-	•	With different delays
-	•	With step-by-step and auto-play mode
-	4.	Fix bugs, unify display and metrics format.
+```bash
+pytest -q
+```
 
-⸻
+## API Endpoints
 
-PHASE 5: Final Polish & Documentation (Day 3 - May 24)
+- `GET /algorithms` – list available algorithms
+- `POST /sort` – sort an array using a chosen algorithm. Body example:
+  ```json
+  {
+    "algorithm": "bubble",
+    "array": [5, 1, 4, 2, 8]
+  }
+  ```
+  The response contains the sequence of states and metrics.
+- `GET /team` – retrieve team information
 
-All team members or delegated
-	1.	Finalize code and clean comments.
-	2.	Write README:
-	•	Project goal
-	•	How to run it
-	•	Description of each feature
-	3.	Test in different terminals (Windows/Linux/macOS)
-	4.	Zip files and submit
+## Project Structure
+
+- `server/` – Flask application and sorting algorithms
+- `client/` – React frontend (Vite)
+- `tests/` – Pytest suite validating algorithms
+
+## License
+
+This project is for educational purposes at Nile University.

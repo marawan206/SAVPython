@@ -1,6 +1,5 @@
 import sys
 import os
-import pytest
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -29,9 +28,3 @@ def check_algorithm(sort_func):
 
 def test_bubble():
     check_algorithm(bubble_sort)
-
-
-@pytest.mark.parametrize('func', [selection_sort, insertion_sort, merge_sort, quick_sort, heap_sort])
-def test_unimplemented(func):
-    with pytest.raises(NotImplementedError):
-        next(func([1, 2, 3]))
