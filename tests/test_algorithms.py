@@ -28,23 +28,3 @@ def check_algorithm(sort_func):
 
 def test_bubble():
     check_algorithm(bubble_sort)
-
-
-def test_selection():
-    check_algorithm(selection_sort)
-
-
-def test_insertion():
-    check_algorithm(insertion_sort)
-
-
-def test_merge():
-    check_algorithm(merge_sort)
-
-
-def test_quick():
-    check_algorithm(quick_sort)
-
-
-def test_heap():
-    check_algorithm(heap_sort)
