@@ -45,7 +45,10 @@ def create_app() -> Flask:
         array = data.get("array")
         if algorithm not in ALGORITHMS or not isinstance(array, list):
             return jsonify({"error": "Invalid request"}), 400
-        steps = []
+        steps = [
+            {"state": state, "metrics": metrics}
+            for state, metrics in ALGORITHMS[algorithm](array)
+        ]
         return jsonify({"steps": steps})
 
     @app.get("/team")
