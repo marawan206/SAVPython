@@ -40,11 +40,11 @@ export default function Controls({
       <select
         value={speed}
         onChange={(e) => setSpeed(e.target.value)}
-        className="px-2 py-1 rounded border border-gray-300"
-      >
-        <option value="slow">Slow</option>
-        <option value="medium">Medium</option>
-        <option value="fast">Fast</option>
+        className="px-4 py-2 rounded-lg bg-gradient-to-r from-gray-100 to-gray-200 text-gray-800 border border-gray-300 shadow-inner"
+        >
+          <option value="slow">🐢 Slow</option>
+          <option value="medium">🚶 Medium</option>
+          <option value="fast">⚡ Fast</option>
       </select>
     </div>
   )

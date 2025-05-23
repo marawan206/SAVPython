@@ -1,22 +1,22 @@
-"""Flask application exposing sorting algorithm APIs."""
-
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-from .algorithms.bubble import bubble_sort
-from .algorithms.selection import selection_sort
-from .algorithms.insertion import insertion_sort
-from .algorithms.merge import merge_sort
-from .algorithms.quick import quick_sort
-from .algorithms.heap import heap_sort
+from algorithms.quick import quick_sort
+from algorithms.heap import heap_sort
+
+# You can re-enable these once available
+# from algorithms.bubble import bubble_sort
+# from algorithms.selection import selection_sort
+# from algorithms.insertion import insertion_sort
+# from algorithms.merge import merge_sort
 
 ALGORITHMS = {
-    "bubble": bubble_sort,
-    "selection": selection_sort,
-    "insertion": insertion_sort,
-    "merge": merge_sort,
     "quick": quick_sort,
     "heap": heap_sort,
+    # "bubble": bubble_sort,
+    # "selection": selection_sort,
+    # "insertion": insertion_sort,
+    # "merge": merge_sort,
 }
 
 TEAM_INFO = {
@@ -29,34 +29,29 @@ TEAM_INFO = {
     ],
 }
 
+app = Flask(__name__)
+CORS(app)
 
-def create_app() -> Flask:
-    app = Flask(__name__)
-    CORS(app)
+@app.get("/algorithms")
+def list_algorithms():
+    return jsonify(sorted(ALGORITHMS.keys()))
 
-    @app.get("/algorithms")
-    def list_algorithms():
-        return jsonify(sorted(ALGORITHMS.keys()))
+@app.post("/sort")
+def sort_endpoint():
+    data = request.get_json() or {}
+    algorithm = data.get("algorithm")
+    array = data.get("array")
+    if algorithm not in ALGORITHMS or not isinstance(array, list):
+        return jsonify({"error": "Invalid request"}), 400
+    steps = [
+        {"state": state, "metrics": metrics}
+        for state, metrics in ALGORITHMS[algorithm](array)
+    ]
+    return jsonify({"steps": steps})
 
-    @app.post("/sort")
-    def sort_endpoint():
-        data = request.get_json() or {}
-        algorithm = data.get("algorithm")
-        array = data.get("array")
-        if algorithm not in ALGORITHMS or not isinstance(array, list):
-            return jsonify({"error": "Invalid request"}), 400
-        steps = [
-            {"state": state, "metrics": metrics}
-            for state, metrics in ALGORITHMS[algorithm](array)
-        ]
-        return jsonify({"steps": steps})
-
-    @app.get("/team")
-    def team_endpoint():
-        return jsonify(TEAM_INFO)
-
-    return app
-
+@app.get("/team")
+def team_endpoint():
+    return jsonify(TEAM_INFO)
 
 if __name__ == "__main__":
-    create_app().run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)

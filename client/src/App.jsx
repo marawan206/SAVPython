@@ -4,7 +4,9 @@ import SortVisualizer from './components/SortVisualizer.jsx'
 import Team from './components/Team.jsx'
 import './App.css'
 
-const algorithms = ['bubble', 'selection', 'insertion', 'merge', 'quick', 'heap']
+const algorithms = ['Quick', 'Heap']
+// TODO -- UPDATE THE ALGOS ONCE THEYRE IMPLEMENTED AGAIN
+// 'Bubble', 'Selection', 'Insertion', 'Merge', 
 
 function VisualizerPage() {
   const [algorithm, setAlgorithm] = useState(algorithms[0])
